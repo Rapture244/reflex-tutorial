@@ -5,10 +5,17 @@ from ..ui.base import base_page
 class ContactState(rx.State):
 
     form_data: dict[str,str] = {}
+    did_submit: bool = False
+
+    @rx.var
+    def thank_you(self):
+        first_name = self.form_data.get("first_name") or ""
+        return f"Thank you {first_name}".strip() + " for leaving your message !"
 
     def handle_submit(self, form_data: dict):
         """Handle the form submit."""
         self.form_data = form_data
+        self.did_submit = True
 
 
 def contact_page() -> rx.Component:
@@ -25,7 +32,7 @@ def contact_page() -> rx.Component:
             rx.input(
                 name = "last_name",
                 placeholder = "Last Name",
-                required = True,
+                required = False,
                 type = "text",
                 width = "100%",
                 ),
@@ -34,8 +41,8 @@ def contact_page() -> rx.Component:
             rx.input(
                 name = "email",
                 placeholder = "Your email",
-                required = True,
-                type = "email",
+                required = False,
+                #type = "email",
                 width = "100%",
             ),
             rx.text_area(
@@ -53,6 +60,7 @@ def contact_page() -> rx.Component:
 
     my_child = rx.vstack(
         rx.heading("New phone who dis ?", size = "9"),
+        rx.cond(ContactState.did_submit, rx.button(rx.icon(tag="star"), ContactState.thank_you, color_scheme = "green")),
         rx.desktop_only(
             rx.box(my_form,
                    width="40vw"),
