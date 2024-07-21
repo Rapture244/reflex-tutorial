@@ -5,6 +5,8 @@ from rxconfig import config
 
 from .ui.base import base_page # from the package 'ui' grab the module 'base' and import the function 'base_page'. Th '.' means in the same root as the current file
 
+from . import pages
+
 #----------------------------------------------------- BACKEND ------------------------------------------------------------------------------------
 class State(rx.State):
     """The app state."""
@@ -46,13 +48,18 @@ def index() -> rx.Component:
                 spacing="5",
                 justify="center",
                 min_height="85vh",
-                text_align="center",
                 align="center",
                 )
     return base_page(my_child)
 
+
+
+
+
+
 #----------------------------------------------------- PAGES --------------------------------------------------------------------------------------
 app = rx.App()
 app.add_page(index)
-
-
+app.add_page(pages.about_page, route='/about')
+app.add_page(pages.pricing_page, route='/pricing')
+app.add_page(pages.contact_page, route='/contact')
