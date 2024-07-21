@@ -21,34 +21,35 @@ class State(rx.State):
 #----------------------------------------------------- FRONTEND -----------------------------------------------------------------------------------
 def index() -> rx.Component:
     # Welcome Page (Index)
-    return base_page(
-        rx.vstack(
-            rx.heading(State.title_heading, size="9"),
-            rx.text(
-                "Get started by editing ",
-                rx.code(f"{config.app_name}/{config.app_name}.py"),
-                size="5",
-            ),
-            rx.link(
-                rx.button("Check out our docs!"),
-                href="https://reflex.dev/docs/getting-started/introduction/",
-                is_external=True,
-            ),
-            rx.input(placeholder =State.title_heading,
-                    default_value = State.title_heading,
-                    max_value = 30,
-                    on_change = State.handle_title_input_change,
-            ),
-            rx.button(
-                rx.icon(tag="skull"),
-                "I'm just a cool Button but i do nothing!",
-                color_scheme="red",
-            ),
-            spacing="5",
-            justify="center",
-            min_height="85vh",
-        ),
-    )
+    my_child= rx.vstack(
+        rx.heading(State.title_heading, size="9"),
+                rx.text(
+                    "Get started by editing ",
+                    rx.code(f"{config.app_name}/{config.app_name}.py"),
+                    size="5",
+                ),
+                rx.link(
+                    rx.button("Check out our docs!"),
+                    href="https://reflex.dev/docs/getting-started/introduction/",
+                    is_external=True,
+                ),
+                rx.input(placeholder =State.title_heading,
+                        default_value = State.title_heading,
+                        max_value = 30,
+                        on_change = State.handle_title_input_change,
+                ),
+                rx.button(
+                    rx.icon(tag="skull"),
+                    "I'm just a cool Button but i do nothing!",
+                    color_scheme="red",
+                ),
+                spacing="5",
+                justify="center",
+                min_height="85vh",
+                text_align="center",
+                align="center",
+                )
+    return base_page(my_child)
 
 #----------------------------------------------------- PAGES --------------------------------------------------------------------------------------
 app = rx.App()

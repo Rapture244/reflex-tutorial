@@ -12,9 +12,16 @@ def base_page(child: rx.Component, hide_navbar=False, *args, **kwargs) -> rx.Com
             rx.logo(),
             rx.color_mode.button(position="bottom_left"),
         )
-    return rx.container(
+    return rx.fragment(
         navbar(),
-        child,
+        rx.box(
+            child,
+            #bg=rx.color("accent", 3),
+            padding="1em",
+            width="100%",
+        ),
         rx.logo(),
-        rx.color_mode.button(position="top-right"),
+        rx.color_mode.button(position="bottom-right"),
     )
+
+
