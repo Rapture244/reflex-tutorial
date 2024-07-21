@@ -1,4 +1,6 @@
 import reflex as rx
+import asyncio
+
 
 from ..ui.base import base_page
 
@@ -12,10 +14,15 @@ class ContactState(rx.State):
         first_name = self.form_data.get("first_name") or ""
         return f"Thank you {first_name}".strip() + " for leaving your message !"
 
-    def handle_submit(self, form_data: dict):
+    async def handle_submit(self, form_data: dict):
         """Handle the form submit."""
         self.form_data = form_data
         self.did_submit = True
+        yield
+        # sleep -> timeout -> setTimeout
+        await asyncio.sleep(5)
+        self.did_submit = False
+        yield
 
 
 def contact_page() -> rx.Component:
