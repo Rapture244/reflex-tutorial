@@ -24,9 +24,9 @@ def navbar() -> rx.Component:
                 ),
                 rx.hstack(
                     navbar_link("Home", "/#"),
-                    navbar_link("About", "/#"),
-                    navbar_link("Pricing", "/#"),
-                    navbar_link("Contact", "/#"),
+                    navbar_link("About", "/about"),
+                    navbar_link("Pricing", "/pricing"),
+                    navbar_link("Contact", "/contact"),
                     spacing="5",
                 ),
                 rx.hstack(
