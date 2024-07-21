@@ -13,9 +13,6 @@ class State(rx.State):
 
     title_heading = "Welcome to Reflex!"
 
-    def handle_title_input_change(self, val):
-        self.title_heading = val
-
 
 
     ...
@@ -31,19 +28,12 @@ def index() -> rx.Component:
                     size="5",
                 ),
                 rx.link(
-                    rx.button("Check out our docs!"),
-                    href="https://reflex.dev/docs/getting-started/introduction/",
-                    is_external=True,
-                ),
-                rx.input(placeholder =State.title_heading,
-                        default_value = State.title_heading,
-                        max_value = 30,
-                        on_change = State.handle_title_input_change,
-                ),
-                rx.button(
-                    rx.icon(tag="skull"),
-                    "I'm just a cool Button but i do nothing!",
-                    color_scheme="red",
+                    rx.button(
+                        rx.icon(tag="skull"),
+                        "Click on me and see what happens!",
+                        color_scheme="red",
+                    ),
+                    href='/about'
                 ),
                 spacing="5",
                 justify="center",
