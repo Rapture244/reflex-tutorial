@@ -2,21 +2,59 @@ import reflex as rx
 
 from ..ui.base import base_page
 
+class ContactState(rx.State):
+
+    form_data: dict[str,str] = {}
+
+    def handle_submit(self, form_data: dict):
+        """Handle the form submit."""
+        self.form_data = form_data
+
+
 def contact_page() -> rx.Component:
-    # Welcome Page (Index)
-    my_child= rx.vstack(
-        rx.heading("New phone who dis ?", size="9"),
-                rx.text(
-                    "Not a good time unless I smoke mine, Too many drugs that make u go blind !",
-                ),
-                rx.button(
-                    rx.icon(tag="skull"),
-                    "Flatbush Zombies!",
-                    color_scheme="red",
-                ),
-                spacing="5",
-                justify="center",
-                min_height="85vh",
-                align="center",
-                )
+    my_form = rx.form(
+        rx.vstack(
+            rx.input(
+                name = "first_name",
+                placeholder = "First Name",
+                required = True,
+                type = "text",
+            ),
+            rx.input(
+                name = "last_name",
+                placeholder = "Last Name",
+                required = True,
+                type = "text",
+            ),
+            rx.input(
+                name = "email",
+                placeholder = "Your email",
+                required = True,
+                type = "email",
+            ),
+            rx.text_area(
+                name = "message",
+                placeholder = "Your message!",
+                required = True,
+                type = "text",
+            ),
+            rx.button("Submit", type = "submit"),
+        ),
+        on_submit = ContactState.handle_submit,
+        reset_on_submit = True,
+    )
+
+    my_child = rx.vstack(
+        rx.heading("New phone who dis ?", size = "9"),
+        my_form,
+        rx.button(
+            rx.icon(tag = "skull"),
+            "Flatbush Zombies!",
+            color_scheme = "red",
+        ),
+        spacing = "5",
+        justify = "center",
+        min_height = "85vh",
+        align = "center",
+    )
     return base_page(my_child)
