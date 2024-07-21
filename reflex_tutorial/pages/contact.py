@@ -19,24 +19,28 @@ def contact_page() -> rx.Component:
                 placeholder = "First Name",
                 required = True,
                 type = "text",
+                width = "100%",
             ),
             rx.input(
                 name = "last_name",
                 placeholder = "Last Name",
                 required = True,
                 type = "text",
+                width = "100%",
             ),
             rx.input(
                 name = "email",
                 placeholder = "Your email",
                 required = True,
                 type = "email",
+                width = "100%",
             ),
             rx.text_area(
                 name = "message",
                 placeholder = "Your message!",
                 required = True,
                 type = "text",
+                width = "100%",
             ),
             rx.button("Submit", type = "submit"),
         ),
@@ -46,7 +50,12 @@ def contact_page() -> rx.Component:
 
     my_child = rx.vstack(
         rx.heading("New phone who dis ?", size = "9"),
-        my_form,
+        rx.desktop_only(
+            rx.box(my_form,
+                   width="40vw"),
+        ),
+        rx.mobile_and_tablet(my_form,
+                             width="75vw"),
         rx.button(
             rx.icon(tag = "skull"),
             "Flatbush Zombies!",
