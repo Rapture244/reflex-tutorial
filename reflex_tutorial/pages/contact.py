@@ -14,19 +14,22 @@ class ContactState(rx.State):
 def contact_page() -> rx.Component:
     my_form = rx.form(
         rx.vstack(
-            rx.input(
+            rx.hstack(
+                rx.input(
                 name = "first_name",
                 placeholder = "First Name",
                 required = True,
                 type = "text",
                 width = "100%",
-            ),
+                ),
             rx.input(
                 name = "last_name",
                 placeholder = "Last Name",
                 required = True,
                 type = "text",
                 width = "100%",
+                ),
+            width = "100%",
             ),
             rx.input(
                 name = "email",
