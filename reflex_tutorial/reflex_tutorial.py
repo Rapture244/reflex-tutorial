@@ -5,7 +5,7 @@ from rxconfig import config
 
 from .ui.base import base_page # from the package 'ui' grab the module 'base' and import the function 'base_page'. Th '.' means in the same root as the current file
 
-from . import pages
+from . import pages, navigation
 
 #----------------------------------------------------- BACKEND ------------------------------------------------------------------------------------
 class State(rx.State):
@@ -33,7 +33,7 @@ def index() -> rx.Component:
                         "Click on me and see what happens!",
                         color_scheme="red",
                     ),
-                    href='/about'
+                    href=navigation.routes.ABOUT_ROUTE
                 ),
                 spacing="5",
                 justify="center",
@@ -49,7 +49,7 @@ def index() -> rx.Component:
 
 #----------------------------------------------------- PAGES --------------------------------------------------------------------------------------
 app = rx.App()
-app.add_page(index)
-app.add_page(pages.about_page, route='/about')
-app.add_page(pages.pricing_page, route='/pricing')
-app.add_page(pages.contact_page, route='/contact')
+app.add_page(index, route=navigation.routes.HOME_ROUTE)
+app.add_page(pages.about_page, route=navigation.routes.ABOUT_ROUTE)
+app.add_page(pages.pricing_page, route=navigation.routes.PRICING_ROUTE)
+app.add_page(pages.contact_page, route=navigation.routes.CONTACT_ROUTE)
