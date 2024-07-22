@@ -4,10 +4,29 @@ import reflex as rx
 from .. import navigation
 from ..ui.base import base_page
 
-from . import form, state
+from . import form, state, model
 
 
 # ------------------------------ CONTACT UI  ---------------------------------------------------------------------
+def contact_entry_list_item(contact: model.ContactEntryModel):
+    return rx.box(
+        rx.heading(contact.first_name),
+        rx.text(contact.message),
+        padding='lem'
+        )
+
+def contact_entries_list_page() -> rx.Component:
+    return base_page(
+        rx.vstack(
+            rx.heading("Contact Entries", size="5"),
+            rx.foreach(state.ContactState.entries, contact_entry_list_item),
+            spacing = "5",
+            min_height = "85vh",
+            align = "center",
+            )
+        )
+
+
 def contact_page() -> rx.Component:
     my_child = rx.vstack(
         rx.heading("New phone who dis ?", size = "9"),

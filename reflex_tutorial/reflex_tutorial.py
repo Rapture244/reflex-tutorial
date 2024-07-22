@@ -53,4 +53,7 @@ app.add_page(index, route=navigation.routes.HOME_ROUTE)
 app.add_page(pages.about_page, route=navigation.routes.ABOUT_ROUTE)
 app.add_page(pages.pricing_page, route=navigation.routes.PRICING_ROUTE)
 app.add_page(contact.contact_page, route=navigation.routes.CONTACT_ROUTE)
-
+app.add_page(contact.contact_entries_list_page,
+             route=navigation.routes.CONTACT_ENTRIES_ROUTE,
+             on_load=contact.ContactState.list_entries
+             )
