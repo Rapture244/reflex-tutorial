@@ -12,9 +12,9 @@ def about_page() -> rx.Component:
                     "All CAPS when u spell the man name",
                 ),
                 rx.button(
-                    rx.icon(tag="skull"),
+                    rx.icon(tag="bird"),
                     "I'm just a cool Button but i do nothing!",
-                    color_scheme="red",
+                    color_scheme="violet",
                 ),
                 spacing="5",
                 justify="center",

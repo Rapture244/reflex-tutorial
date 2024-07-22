@@ -12,8 +12,8 @@ def pricing_page() -> rx.Component:
                     "Don't need no green thought I got some to spend in the end all i really need is a friend",
                 ),
                 rx.button(
-                    rx.icon(tag="skull"),
-                    "I'm just a cool Button but i do nothing!",
+                    rx.icon(tag="sword"),
+                    "Fuck u it's a vendetta !!!",
                     color_scheme="red",
                 ),
                 spacing="5",
