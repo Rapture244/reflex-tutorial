@@ -5,7 +5,7 @@ from rxconfig import config
 
 from .ui.base import base_page # from the package 'ui' grab the module 'base' and import the function 'base_page'. Th '.' means in the same root as the current file
 
-from . import pages, navigation, contact
+from . import  blog, contact, navigation, pages
 
 #----------------------------------------------------- BACKEND ------------------------------------------------------------------------------------
 class State(rx.State):
