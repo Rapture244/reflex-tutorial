@@ -4,6 +4,18 @@ import asyncio
 
 from ..ui.base import base_page
 
+
+#------------------------------ FOR DATABASE ---------------------------------------------------------------------
+class ContactEntryModel(rx.Model, table= True):
+    first_name: str
+    last_name: str
+    email: str
+    message: str
+
+
+
+
+#------------------------------ FOR CONTACT INFO ---------------------------------------------------------------------
 class ContactState(rx.State):
 
     form_data: dict[str,str] = {}
