@@ -3,16 +3,15 @@ import asyncio
 
 
 from ..ui.base import base_page
+from .. import navigation
 
 
 #------------------------------ FOR DATABASE ---------------------------------------------------------------------
 class ContactEntryModel(rx.Model, table= True):
     first_name: str
-    last_name: str
-    email: str
+    last_name: str | None = None
+    email: str | None = None
     message: str
-
-
 
 
 #------------------------------ FOR CONTACT INFO ---------------------------------------------------------------------
@@ -29,14 +28,32 @@ class ContactState(rx.State):
     async def handle_submit(self, form_data: dict):
         """Handle the form submit."""
         self.form_data = form_data
-        self.did_submit = True
-        yield
-        # sleep -> timeout -> setTimeout
-        await asyncio.sleep(5)
-        self.did_submit = False
-        yield
+        data = {}
+        for k,v in form_data.items():
+            if v == "" or v is None:
+                continue
+            data[k] = v
+        # print(data)     -> This was to check the value that were entered and if it worked during the testing
+        with rx.session() as session:
+            db_entry = ContactEntryModel(
+                **data
+            )
+            session.add(db_entry)
+            session.commit()
+            self.did_submit = True
+            yield
+            # sleep -> timeout -> setTimeout
+            await asyncio.sleep(5)
+            self.did_submit = False
+            yield
 
 
+
+
+@rx.page(
+    route=navigation.routes.CONTACT_ROUTE
+)
+#------------------------------ CONTACT UI  ---------------------------------------------------------------------
 def contact_page() -> rx.Component:
     my_form = rx.form(
         rx.vstack(
