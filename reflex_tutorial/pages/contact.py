@@ -1,17 +1,35 @@
+# Libraries
+from datetime import datetime, timezone
 import reflex as rx
 import asyncio
 
+import sqlalchemy
+from sqlmodel import Field
 
+# Packages & modules created by me
 from ..ui.base import base_page
 from .. import navigation
 
 
 #------------------------------ FOR DATABASE ---------------------------------------------------------------------
+def get_utc_now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+
 class ContactEntryModel(rx.Model, table= True):
     first_name: str
     last_name: str | None = None
     email: str | None = None
     message: str
+    created_at: datetime = Field(
+        default_factory=get_utc_now,
+        sa_type = sqlalchemy.DateTime(timezone=True),
+        sa_column_kwargs = {
+            'server_default': sqlalchemy.func.now()
+        },
+        nullable = False
+    )
 
 
 #------------------------------ FOR CONTACT INFO ---------------------------------------------------------------------
